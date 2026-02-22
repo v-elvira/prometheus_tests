@@ -3,6 +3,17 @@ localhost -> host.docker.internal in Docker Desktop
 Путь через ./ на win не всегда находился, через .\ ок
 promtool check config <promet.yml>
 
+_
+Ещё можно положить все docker-compose контейнеры в одну общую сеть external (Checked on Win)
+___
+docker network create promet_test
+_
+networks:
+  promet:
+    external: true
+    name: promet_test
+__
+
 AI ответ про host.docker.internal на ubuntu:
 
 Чтобы достичь того же результата на Ubuntu, используйте один из следующих способов:

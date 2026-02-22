@@ -9,6 +9,9 @@ services:
     command:
       - '--path.rootfs=/host'
     # network_mode: host
+    # netstat on win: --
+    networks:
+      - promet
 
   prometheus:
     container_name: prometheus
@@ -20,3 +23,9 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     # network_mode: host
+    networks:
+      - promet
+networks:
+  promet:
+    external: true
+    name: promet_test

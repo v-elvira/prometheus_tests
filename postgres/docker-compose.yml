@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: postgres
     ports: 
       - 5432:5432
+    networks:
+      - promet
 
   postgres-exporter:
     container_name: postgres-exporter
@@ -18,3 +20,10 @@ services:
       - 9187:9187
     environment:
       DATA_SOURCE_NAME: "postgresql://postgres:password@postgres:5432/postgres?sslmode=disable"
+    networks:
+      - promet
+
+networks:
+  promet:
+    external: true
+    name: promet_test
