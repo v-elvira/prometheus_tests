@@ -1,0 +1,9 @@
+services:
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    volumes:
+      - '/:/host:ro'
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host

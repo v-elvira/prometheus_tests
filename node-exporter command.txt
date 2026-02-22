@@ -1,0 +1,1 @@
+docker run --name node-exporter -p 9100:9100 -v /:/host:ro  prom/node-exporter --path.rootfs=/host
