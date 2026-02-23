@@ -1,0 +1,26 @@
+groups:
+  - name: Node
+    interval: 15s
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100 > 80
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Высокая загрузка CPU на {{ $labels.instance }}"
+          description: "CPU загружен на {{ printf \"%.1f\" $value }}% в течение 5 минут"
+
+
+# groups:
+#   - name: Instance
+#     interval: 15s
+#     rules:
+#       - alert: HighDiskUsage
+#         expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes * 100) < 10
+#         for: 5m
+#         labels:
+#           severity: critical
+#         annotations:
+#           summary: "Диск почти заполнен на {{ $labels.instance }} ({{ $labels.mountpoint }})"
+#           description: "Осталось меньше 10% свободного места на {{ $labels.device }}"

@@ -1,0 +1,22 @@
+services:
+  alertmanager:
+    container_name: alertmanager
+    image: prom/alertmanager
+    ports:
+      - 9093:9093
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - '.\rules.yml:/etc/prometheus/rules/rules.yml'
+      - '.\prometheus.yml:/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+  
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+
