@@ -1,0 +1,31 @@
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'grafana-data:/var/lib/grafana'
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - '.\prometheus.yml:/etc/prometheus/prometheus.yml'
+  
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    ports:
+      - '9100:9100'
+    volumes:
+      - 'C:\:/host:ro'
+    command:
+      - '--path.rootfs=/host'
+
+volumes:
+  grafana-data:
