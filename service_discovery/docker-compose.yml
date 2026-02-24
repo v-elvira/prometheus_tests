@@ -1,0 +1,35 @@
+services:
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    ports:
+      - '9101:9100'
+    volumes:
+      - '/:/host:ro'   # ok on win! (node_filesystem_free_bytes label diff)
+    command:
+      - '--path.rootfs=/host'
+
+  node-exporter-2:
+    container_name: node-exporter-2
+    image: prom/node-exporter
+    ports:
+      - '9100:9100'
+    volumes:
+      - 'C:\:/host:ro'
+    command:
+      - '--path.rootfs=/host'
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - '.\prometheus.yml:/etc/prometheus/prometheus.yml'
+      - './targets.json:/etc/prometheus/targets.json'
+      # - '/var/run/docker.sock:/var/run/docker.sock' # Монтируем сокет Docker (try on unix)
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+
+# ./ slash was ok for win (?)

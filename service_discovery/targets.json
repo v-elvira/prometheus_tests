@@ -1,0 +1,6 @@
+[
+  {
+    "targets": ["node-exporter:9100", "node-exporter-2:9100"],
+    "labels": {}
+  }
+]
