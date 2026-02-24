@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'federation'
+    honor_labels: true
+
+    metrics_path: '/federate'
+    params:
+      'match[]':
+        - '{__name__=~".+"}'      # all (=~ means regex)
+
+    static_configs:
+      - targets:
+          - 'prometheus-low:9090'

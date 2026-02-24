@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 15s
+  external_labels:            # for top-level prometheus to identify the metric source
+    region: example
+
+scrape_configs:
+  - job_name: 'prometheus'    # itself
+    static_configs:
+      - targets:
+          - 'prometheus-low:9090'
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets:
+          - 'node-exporter:9100'
