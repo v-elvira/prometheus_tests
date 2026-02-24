@@ -11,6 +11,18 @@ groups:
           summary: "Высокая загрузка CPU на {{ $labels.instance }}"
           description: "CPU загружен на {{ printf \"%.1f\" $value }}% в течение 5 минут"
 
+  - name: Instance
+    interval: 15s
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} is down"
+          description: "The target {{ $labels.job }} on {{ $labels.instance }} has been unreachable for more than 1 minute."
+
 
 # groups:
 #   - name: Instance

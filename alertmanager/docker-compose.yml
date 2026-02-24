@@ -4,6 +4,12 @@ services:
     image: prom/alertmanager
     ports:
       - 9093:9093
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    volumes:
+      - '.\alertmanager.yml:/etc/alertmanager/alertmanager.yml'
+      - '.\telegram.tmpl:/etc/alertmanager/templates/telegram.tmpl'
+
 
   prometheus:
     image: prom/prometheus
@@ -19,4 +25,15 @@ services:
   node-exporter:
     image: prom/node-exporter
     container_name: node-exporter
+    ports:
+      - '9100:9100'
+    volumes:
+      - 'C:\:/host:ro'
+    command:
+      - '--path.rootfs=/host'
+
+  fastapi_app:
+    build: .\fastapi_app
+    ports:
+      - '8000:8000'
 

@@ -1,0 +1,24 @@
+route:
+  receiver: 'null'
+  group_by: ['instance', 'severity']
+  group_wait: 30s
+  group_interval: 3m
+  repeat_interval: 1h
+  routes:
+    - matchers:
+        - 'severity=~critical|warning'
+      receiver: 'telegram'
+
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+receivers:
+  - name: 'null'
+
+  - name: 'telegram'
+    telegram_configs:
+      - api_url: https://api.telegram.org
+        bot_token: "5469710505:AAFgCaMVkLXjg_MhPW2-u9gqCTwlK_BWDMI"
+        chat_id: 1431762917
+        message: '{{ template "telegram" . }}'
+        send_resolved: true

@@ -37,3 +37,7 @@ services:
     Вместо localhost:8080 используйте 172.17.0.1:8080.
     Важно: этот адрес может измениться, если вы создаете свои кастомные сети в Compose. Чтобы узнать точный адрес шлюза, выполните на хосте:
     docker network inspect bridge --format '{{range .IPAM.Config}}{{.Gateway}}{{end}}'.
+
+_____________________
+
+curl -XGET https://api.telegram.org/bot<ТОКЕН ВАШЕГО БОТА>/GetUpdates to know chat id

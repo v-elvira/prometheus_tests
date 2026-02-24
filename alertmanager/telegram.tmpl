@@ -1,0 +1,14 @@
+{{ define "telegram" }}
+
+🚨 Alert: {{ .CommonLabels.alertname }}
+
+Summary: {{ .CommonAnnotations.summary }}
+Description: {{ .CommonAnnotations.description }}
+
+{{ if eq (index .Alerts 0).Status "resolved" }}
+✅ RESOLVED
+{{ else }}
+🔥 FIRING
+{{ end }}
+
+{{ end }}
